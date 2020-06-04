@@ -27,8 +27,8 @@ cp /etc/zfs/zpool.cache /mnt/etc/zfs/zpool.cache
 
 # Gen FSTAB 
 # TODO: assumes /dev/sda1
-mkdir /mnt/efi
-mount /dev/sda1 /mnt/efi
+mkdir /mnt/boot
+mount /dev/sda1 /mnt/boot
 genfstab -U -p /mnt >> /mnt/etc/fstab
 
 echo "modify /mnt/etc/fstab to comment out non zfs partitions"
