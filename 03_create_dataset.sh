@@ -1,5 +1,4 @@
 #!/bin/bash
-
 zfs create -o mountpoint=none zroot/data
 zfs create -o mountpoint=none zroot/ROOT
 zfs create -o mountpoint=/ -o canmount=noauto zroot/ROOT/default
@@ -12,10 +11,8 @@ zfs create -o mountpoint=/var/lib -o canmount=off zroot/var/lib
 zfs create                                        zroot/var/lib/libvirt
 zfs create                                        zroot/var/lib/docker
 
-
 zpool export zroot
 rm -r /mnt*
-
 
 # mount pool
 zpool import -d /dev/disk/by-id -R /mnt zroot -N
@@ -27,3 +24,11 @@ zpool set bootfs=zroot/ROOT/default zroot
 zpool set cachefile=/etc/zfs/zpool.cache zroot
 mkdir -p /mnt/etc/zfs/
 cp /etc/zfs/zpool.cache /mnt/etc/zfs/zpool.cache
+
+# Gen FSTAB 
+# TODO: assumes /dev/sda1
+mkdir /mnt/efi
+mount /dev/sda1 /mnt/efi
+genfstab -U -p /mnt >> /mnt/etc/fstab
+
+echo "modify /mnt/etc/fstab to comment out non zfs partitions"

@@ -1,6 +1,5 @@
 #!/bin/bash
-
-zpool create -f -o ashift=12           \
+zpool create -f -o ashift=12  \
     -O acltype=posixacl       \
     -O relatime=on            \
     -O xattr=sa               \
