@@ -11,3 +11,19 @@ zfs create                                        zroot/var/log
 zfs create -o mountpoint=/var/lib -o canmount=off zroot/var/lib
 zfs create                                        zroot/var/lib/libvirt
 zfs create                                        zroot/var/lib/docker
+
+
+zpool export zroot
+rm -r /mnt*
+
+
+# mount pool
+zpool import -d /dev/disk/by-id -R /mnt zroot -N
+zfs load-key zroot
+
+zfs mount zroot/ROOT/default
+zfs mount -a
+zpool set bootfs=zroot/ROOT/default zroot
+zpool set cachefile=/etc/zfs/zpool.cache zroot
+mkdir -p /mnt/etc/zfs/
+cp /etc/zfs/zpool.cache /mnt/etc/zfs/zpool.cache
