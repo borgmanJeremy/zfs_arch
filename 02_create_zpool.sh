@@ -15,4 +15,4 @@ zpool create -f -o ashift=12  \
     -O encryption=aes-256-gcm \
     -O keyformat=passphrase   \
     -O keylocation=prompt     \
-    ${POOL_NAME}/dev/disk/by-id/$1
+    $POOL_NAME /dev/disk/by-id/$1

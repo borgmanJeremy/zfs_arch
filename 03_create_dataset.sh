@@ -1,5 +1,6 @@
 #!/bin/bash
 
+zfs create -o mountpoint=none                     $SYS_ROOT
 zfs create -o mountpoint=none                     $SYS_ROOT/$SYSTEM_NAME
 zfs create -o mountpoint=none                     $SYS_ROOT/$SYSTEM_NAME/ROOT
 zfs create -o mountpoint=/ -o canmount=noauto     $SYS_ROOT/$SYSTEM_NAME/ROOT/default
@@ -35,9 +36,9 @@ rm -r /mnt*
 zpool import -d /dev/disk/by-id -R /mnt $POOL_NAME -N
 zfs load-key $POOL_NAME
 
-zfs mount $POOL_NAME/ROOT/default
+zfs mount $SYS_ROOT/$SYSTEM_NAME/ROOT/default
 zfs mount -a
-zpool set bootfs=$POOL_NAME/ROOT/default $POOL_NAME
+zpool set bootfs=$SYS_ROOT/$SYSTEM_NAME/ROOT/default $POOL_NAME
 zpool set cachefile=/etc/zfs/zpool.cache $POOL_NAME
 
 
