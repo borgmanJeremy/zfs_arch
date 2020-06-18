@@ -5,10 +5,10 @@ cp -R ../ /mnt/mnt/tmp
 echo '[archzfs]
 Server = http://archzfs.com/$repo/x86_64
 Server = http://mirror.sum7.eu/archlinux/archzfs/$repo/x86_64
-Server = https://mirror.biocrafting.net/archlinux/archzfs/$repo/x86_64 ' << /mnt/etc/pacman.conf
+Server = https://mirror.biocrafting.net/archlinux/archzfs/$repo/x86_64  
 
 [archzfs-kernels]
-Server = http://end.re/$repo/
+Server = http://end.re/$repo/ '  >> /mnt/etc/pacman.conf
 
-arch-chroot /mnt
+# arch-chroot /mnt
 
