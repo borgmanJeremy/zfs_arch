@@ -25,7 +25,7 @@ zfs create -o mountpoint=/var/lib/docker             $SYS_ROOT/$SYSTEM_NAME/var/
 zfs create -o mountpoint=/var/log/journal          -o acltype=posixacl   $SYS_ROOT/$SYSTEM_NAME/var/log/journal
 
 # Adjust permissions
-zfs allow $USER create,mount,mountpoint,snapshot $SYS_ROOT/$SYSTEM_NAME/home/$USER
+#zfs allow $USER create,mount,mountpoint,snapshot $SYS_ROOT/$SYSTEM_NAME/home/$USER
 
 
 zfs umount -a
