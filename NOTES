@@ -1,9 +1,30 @@
-add arch zfs repo
+he repository for Arch Linux based distribution can be found at https://pkg.surfacelinux.com/arch/.
 
-[archzfs]
-Server = http://archzfs.com/$repo/x86_64
-Server = http://mirror.sum7.eu/archlinux/archzfs/$repo/x86_64
-Server = https://mirror.biocrafting.net/archlinux/archzfs/$repo/x86_64
+This repository provides only binary kernel packages as well as the secure boot key. The utilities and tools (i.e. surface-dtx-daemon, surface-control, and libwacom-surface) can be found in the Arch user repository (AUR). Pre-compiled packages of the surface control utility and the DTX daemon are available under the -bin suffix (i.e. surface-control-bin).
 
-[archzfs-kernels]
-Server = http://end.re/$repo/
+Before adding this repository, you should first add the key used to sign the packages in it. You can do this by running the following commands:
+
+wget -qO - https://raw.githubusercontent.com/linux-surface/linux-surface/master/pkg/keys/surface.asc \
+    | sudo pacman-key --add -
+
+It is recommended that you now fingerprint it by running
+
+sudo pacman-key --finger 56C464BAAC421453
+
+and in a final step, you have to locally sign the key to trust it via
+
+sudo pacman-key --lsign-key 56C464BAAC421453
+
+More infos on this process can be found at https://wiki.archlinux.org/index.php/Pacman/Package_signing#Adding_unofficial_keys. You can now add the repository by editing /etc/pacman.conf and adding
+
+[linux-surface]
+Server = https://pkg.surfacelinux.com/arch/
+
+
+
+
+Install the required packages.
+
+    For Arch:
+
+    sudo pacman -S linux-surface-headers linux-surface surface-ipts-firmware
